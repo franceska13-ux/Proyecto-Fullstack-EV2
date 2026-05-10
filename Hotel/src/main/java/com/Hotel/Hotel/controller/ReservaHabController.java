@@ -43,6 +43,17 @@ public class ReservaHabController {
         }
     }
 
+    @GetMapping("/precio/{precioNoche}")
+    public ResponseEntity<List<ReservaHabDTO>> buscarPorPrecio(@PathVariable Integer precioNoche) {
+        List<ReservaHabDTO> reservas = reservaHabService.buscarPorPrecioNoche(precioNoche);
+        
+        if (reservas.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        
+        return new ResponseEntity<>(reservas, HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<ReservaHabitacion> agregarReservaHab(@RequestBody ReservaHabitacion reservaHab) {
         try{

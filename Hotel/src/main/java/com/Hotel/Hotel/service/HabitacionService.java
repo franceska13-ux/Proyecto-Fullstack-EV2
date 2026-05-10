@@ -43,19 +43,24 @@ public class HabitacionService {
         } catch (RuntimeException e) {
             return e.getMessage();
         }
-    }    
+    }   
+    
+    public List<HabitacionDTO> buscarPorEstado(String estado) {
+        return habitacionRepository.findByEstado(estado).stream()
+                .map(this::convertirADTO)
+                .toList();
+    }
 
     private HabitacionDTO convertirADTO(Habitacion habitacion) {
         HabitacionDTO dto = new HabitacionDTO();
         dto.setEstado(habitacion.getEstado());
-        dto.setId_Habitacion(habitacion.getId_Habitacion());
+        dto.setId_Habitacion(habitacion.getIdHabitacion());
         dto.setNumero(habitacion.getNumero());
 
         if (habitacion.getHotel() != null) {
-            dto.setID_Hotel(habitacion.getId_Habitacion());
-            
-        }else{
-            dto.setID_Hotel(null);;
+            dto.setID_Hotel(habitacion.getHotel().getId_hotel());
+        } else {
+            dto.setID_Hotel(null);
         }
 
         return dto;

@@ -27,7 +27,13 @@ public class PagoService {
     public PagoDTO buscarPorId(Integer Id_pago) {
         Pago pago = pagoRepository.findById(Id_pago)
                 .orElseThrow(() -> new RuntimeException("El pago no existe"));
-            return convertirADTO(pago);
+        return convertirADTO(pago);
+    }
+
+    public List<PagoDTO> buscarPorMetodo(String metodo) {
+        return pagoRepository.findByMetodo(metodo).stream()
+                .map(this::convertirADTO)
+                .toList();
     }
 
     public Pago guardarPago(Pago pago) {
@@ -39,7 +45,7 @@ public class PagoService {
             Pago pago = pagoRepository.findById(id)
                     .orElseThrow(() -> new RuntimeException("¡Imposible eliminar! El pago con ID " + id + " no existe."));
             pagoRepository.delete(pago);
-            return "El pago '" + pago.getId_pago() + "' ha sido eliminado exitosamente.";
+            return "El pago '" + pago.getIdPago() + "' ha sido eliminado exitosamente.";
         } catch (RuntimeException e ) {
             return e.getMessage();
         }
@@ -47,13 +53,13 @@ public class PagoService {
 
     private PagoDTO convertirADTO(Pago pago) {
         PagoDTO dto = new PagoDTO();
-        dto.setId_pago(pago.getId_pago());
+        dto.setId_pago(pago.getIdPago());
         dto.setMonto(pago.getMonto());
         dto.setMetodo(pago.getMetodo());
         dto.setEstado(pago.getEstado());
 
-        if (pago.getReservas() != null) {
-            dto.setID_reserva(pago.getId_pago());
+        if (pago.getReserva() != null) {
+            dto.setID_reserva(pago.getIdPago());
         } else{
             dto.setID_reserva(null);
         }

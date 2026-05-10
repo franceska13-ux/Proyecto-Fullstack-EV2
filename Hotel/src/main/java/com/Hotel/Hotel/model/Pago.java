@@ -25,32 +25,29 @@ import lombok.NoArgsConstructor;
 @Table(name = "Pago")
 public class Pago {
 
-    @Id
+@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_pago")
-    private Integer Id_pago;
+    private Integer idPago; 
 
     @ManyToOne
-    @JoinColumn(name = "ID_reserva")
-    @Column(nullable = false)
-    private Reservas reservas;
-
+    @JoinColumn(name = "ID_reserva", nullable = false) 
+    private Reservas reserva; 
     @NotNull(message = "El monto no puede ser nulo")
     @Column(nullable = false)
     private Integer monto;
 
     @JsonFormat(pattern = "dd-MM-yyyy")
     @Column(name = "fecha_pago", nullable = false)
-    private LocalDate fecha_pago;
+    private LocalDate fechaPago;
 
-    @NotBlank(message =  "El metodo de pago no puede ser nulo")
+    @NotBlank(message = "El metodo de pago no puede ser nulo")
     @Column(nullable = false, length = 20)
-    private String Metodo;
+    private String metodo;
 
-    @NotNull(message =  "El estado no puede ser nulo") 
+    @NotNull(message = "El estado no puede ser nulo") 
     @Column(nullable = false)
     private Boolean estado;
-
 
 
 }

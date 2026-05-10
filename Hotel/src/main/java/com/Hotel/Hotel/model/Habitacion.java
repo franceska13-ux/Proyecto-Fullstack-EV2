@@ -25,7 +25,7 @@ public class Habitacion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_Habitacion")
-    private Integer Id_Habitacion;
+    private Integer idHabitacion;
 
     @ManyToOne
     @JoinColumn(name = "ID_hotel", nullable = false)

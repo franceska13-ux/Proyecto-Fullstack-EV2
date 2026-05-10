@@ -43,6 +43,16 @@ public class HabitacionController {
         }
     }
 
+    @GetMapping("/estado/{estado}")
+    public ResponseEntity<List<HabitacionDTO>> buscarPorEstado(@PathVariable String estado) {
+        List<HabitacionDTO> habitaciones = habitacionService.buscarPorEstado(estado);
+        
+        if (habitaciones.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(habitaciones, HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<Habitacion> agregarHabitacion(@RequestBody Habitacion habitacion) {
         try{

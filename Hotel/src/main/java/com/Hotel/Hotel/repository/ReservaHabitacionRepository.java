@@ -17,9 +17,6 @@ public interface ReservaHabitacionRepository extends JpaRepository <ReservaHabit
     // 2. Buscar el historial de una habitación específica
     // Ideal para saber cuántas veces se ha reservado una habitación
     List<ReservaHabitacion> findByHabitacionIdHabitacion(Integer idHabitacion);
-
-    // 3. Buscar por precio (Ejemplo: buscar reservas de habitaciones que costaron más de X)
-    List<ReservaHabitacion> findByPrecioNocheGreaterThan(Integer precio);
     
     // 4. Buscar por precio exacto
     List<ReservaHabitacion> findByPrecioNoche(Integer precioNoche);

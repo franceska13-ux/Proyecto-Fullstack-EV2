@@ -1,14 +1,12 @@
 package com.Hotel.Hotel.model;
 
-import org.hibernate.annotations.ManyToAny;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -25,28 +23,19 @@ public class ReservaHabitacion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_Reserva_Hab")
-    private Integer Id_Reserva_Hab;
+    private Integer idReservaHab;
 
     @NotNull(message = "El precio por noche no puede ser nulo")
     @Column(nullable = false)
-    private Integer Precio_noche;
+    private Integer precioNoche; 
 
-    @OneToMany
-    @JoinColumn(name = "ID_reserva")
-    @Column(nullable = false)
-    private Reservas reservas;
+    @ManyToOne 
+    @JoinColumn(name = "ID_reserva", nullable = false) 
+    private Reservas reserva; 
 
-    @ManyToAny
-    @JoinColumn(name = "ID_Habitacion")
-    @Column(nullable = false)
+    @ManyToOne 
+    @JoinColumn(name = "ID_Habitacion", nullable = false) 
     private Habitacion habitacion;
-
-
-
-
-
-
-
 
 
 }

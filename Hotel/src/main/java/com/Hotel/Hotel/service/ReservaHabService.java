@@ -45,10 +45,17 @@ public class ReservaHabService {
         }
     }    
 
+    public List<ReservaHabDTO> buscarPorPrecioNoche(Integer precioNoche) {
+        List<ReservaHabitacion> reservas = reservaHabRepository.findByPrecioNoche(precioNoche);
+        return reservas.stream()
+                .map(this::convertirADTO)
+                .toList();
+    }
+
     private ReservaHabDTO convertirADTO(ReservaHabitacion reservaHab) {
         ReservaHabDTO dto = new ReservaHabDTO();
-        dto.setId__Reserva_Hab(reservaHab.getId_Reserva_Hab());
-        dto.setPrecio_noche(reservaHab.getPrecio_noche());
+        dto.setId__Reserva_Hab(reservaHab.getIdReservaHab());
+        dto.setPrecio_noche(reservaHab.getPrecioNoche());
 
         return dto;
     }

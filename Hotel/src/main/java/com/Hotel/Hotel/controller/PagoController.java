@@ -43,6 +43,16 @@ public class PagoController {
         }
     }
 
+    @GetMapping("/metodo/{metodo}")
+    public ResponseEntity<List<PagoDTO>> buscarPorMetodo(@PathVariable String metodo) {
+        List<PagoDTO> pagos = pagoService.buscarPorMetodo(metodo);
+        
+        if (pagos.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(pagos, HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<Pago> agregarPago(@RequestBody Pago pago) {
         try {
